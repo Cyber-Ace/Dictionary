@@ -21,13 +21,9 @@ function App() {
   function fetchWordOfTheDay() {
     Axios.get("https://api.dictionaryapi.dev/api/v2/entries/en_US/turkey")
       .then((response) => {
-        // Filter out words that do not make sense (e.g., slang, abbreviations)
-        const filteredWords = response.data.filter((word) => {
-          // Add your own logic here to filter out words that do not make sense
+        const filteredWords = response.data.filter((word) => {e
           return true;
         });
-        
-        // Pick a random word from the filtered list
         const randomIndex = Math.floor(Math.random() * filteredWords.length);
         setWordOfTheDay(filteredWords[randomIndex]);
       })
@@ -46,7 +42,7 @@ function App() {
         setLoading(false);
         addToHistory(response.data[0]);
         setLastSearchedWord(searchWord);
-        setError(null); // Clear error message
+        setError(null); 
       })
       .catch((error) => {
         if (error.response && error.response.status === 404) {
@@ -65,7 +61,7 @@ function App() {
   }
 
   function getMeaningFromHistory(word) {
-    setData(null); // Clear previous data
+    setData(null); 
     setLoading(true);
     Axios.get(
       `https://api.dictionaryapi.dev/api/v2/entries/en_US/${word.word}`
@@ -73,7 +69,7 @@ function App() {
       .then((response) => {
         setData(response.data[0]);
         setLoading(false);
-        setError(null); // Clear error message
+        setError(null); 
       })
       .catch((error) => {
         setError("Failed to fetch data");
@@ -102,14 +98,17 @@ function App() {
         setLoading(false);
       });
   }
-function playAudio() {
+
+  function playAudio() {
     if (data && data.phonetics && data.phonetics.length > 0) {
       console.log("Audio URL:", data.phonetics[0].audio);
       let audio = new Audio(data.phonetics[0].audio);
       audio.play();
     }
   }
-    return (
+  
+
+  return (
     <div className="App">
       <div className="wordOfTheDay card">
         <h3>Word of the Day:</h3>
