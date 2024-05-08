@@ -19,7 +19,7 @@ function App() {
   }, []);
 
   function fetchWordOfTheDay() {
-    Axios.get("https://api.dictionaryapi.dev/api/v2/entries/en_US/random")
+    Axios.get("https://api.dictionaryapi.dev/api/v2/entries/en_US/turkey")
       .then((response) => {
         // Filter out words that do not make sense (e.g., slang, abbreviations)
         const filteredWords = response.data.filter((word) => {
@@ -86,15 +86,30 @@ function App() {
       setFavorites([...favorites, word]);
     }
   }
-
-  function playAudio() {
+  function getMeaningFromFavourites(word) {
+    setData(null); // Clear previous data
+    setLoading(true);
+    Axios.get(
+      `https://api.dictionaryapi.dev/api/v2/entries/en_US/${word.word}`
+    )
+      .then((response) => {
+        setData(response.data[0]);
+        setLoading(false);
+        setError(null); // Clear error message
+      })
+      .catch((error) => {
+        setError("Failed to fetch data");
+        setLoading(false);
+      });
+  }
+function playAudio() {
     if (data && data.phonetics && data.phonetics.length > 0) {
+      console.log("Audio URL:", data.phonetics[0].audio);
       let audio = new Audio(data.phonetics[0].audio);
       audio.play();
     }
   }
-
-  return (
+    return (
     <div className="App">
       <div className="wordOfTheDay card">
         <h3>Word of the Day:</h3>
@@ -158,7 +173,7 @@ function App() {
           <h3>Favorites:</h3>
           <ul>
             {favorites.map((word, index) => (
-              <li key={index}>{word.word}</li>
+              <li key={index} onClick={() => getMeaningFromFavourites(word)} >{word.word}</li>
             ))}
           </ul>
         </div>
@@ -166,5 +181,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
