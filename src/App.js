@@ -21,7 +21,7 @@ function App() {
   function fetchWordOfTheDay() {
     Axios.get("https://api.dictionaryapi.dev/api/v2/entries/en_US/turkey")
       .then((response) => {
-        const filteredWords = response.data.filter((word) => {e
+        const filteredWords = response.data.filter((word) => {
           return true;
         });
         const randomIndex = Math.floor(Math.random() * filteredWords.length);
@@ -61,7 +61,7 @@ function App() {
   }
 
   function getMeaningFromHistory(word) {
-    setData(null); 
+    setData(null);
     setLoading(true);
     Axios.get(
       `https://api.dictionaryapi.dev/api/v2/entries/en_US/${word.word}`
@@ -83,7 +83,7 @@ function App() {
     }
   }
   function getMeaningFromFavourites(word) {
-    setData(null); // Clear previous data
+    setData(null); 
     setLoading(true);
     Axios.get(
       `https://api.dictionaryapi.dev/api/v2/entries/en_US/${word.word}`
@@ -91,7 +91,7 @@ function App() {
       .then((response) => {
         setData(response.data[0]);
         setLoading(false);
-        setError(null); // Clear error message
+        setError(null);
       })
       .catch((error) => {
         setError("Failed to fetch data");
