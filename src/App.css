@@ -64,12 +64,12 @@ input {
 .partOfSpeechText,
 .definitionText,
 .exampleText {
-  color: #f3f0f0; /* Set the text color to white */
+  color: #f3f0f0;
 }
 .partOfSpeech,
 .definition,
 .example {
-  color: #010003; /* Set the text color to white */
+  color: #010003;
 }
 .showResults > h2 > button {
   background: none;
@@ -87,11 +87,11 @@ input {
 .history,
 .favorites {
   flex: 1;
-  background-color: rgba(33,37,41,255); /* Set the cards background color to black */
+  background-color: rgba(33,37,41,255);
   border-radius: 8px;
   padding: 20px;
   margin-right: 20px;
-  color: white; /* Set text color to white */
+  color: white;
 }
 
 .history h3,
